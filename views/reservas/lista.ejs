@@ -1,0 +1,17 @@
+<section>
+  <div class="titulo-fila"><div><p class="eyebrow"><%= seccion %></p><h1>Reservas de estudio</h1></div><a class="boton" href="/reservas/nueva">Nueva reserva</a></div>
+  <% if (reservas.length === 0) { %>
+    <div class="vacio"><h2>Todavía no hay reservas</h2><p>Cuando alguien reserve un turno, lo verás aquí.</p><a href="/reservas/nueva">Crear la primera reserva</a></div>
+  <% } else { %>
+    <div class="tarjetas">
+      <% reservas.forEach((reserva) => { %>
+        <article class="tarjeta">
+          <p class="eyebrow"><%= reserva.sala %> · <%= reserva.turno %></p>
+          <h2><a href="/reservas/<%= reserva.id %>"><%= reserva.estudiante %></a></h2>
+          <p><%= reserva.fecha %> · <%= reserva.personas %> <%= reserva.personas === 1 ? "persona" : "personas" %></p>
+          <a class="enlace" href="/reservas/<%= reserva.id %>">Ver detalle <span aria-hidden="true">→</span></a>
+        </article>
+      <% }); %>
+    </div>
+  <% } %>
+</section>

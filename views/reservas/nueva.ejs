@@ -1,0 +1,15 @@
+<section class="formulario">
+  <p class="eyebrow"><%= seccion %></p>
+  <h1>Reservar una sala</h1>
+  <p>Completa los datos para apartar temporalmente un turno de estudio.</p>
+  <% if (error) { %><p class="alerta" role="alert"><%= error %></p><% } %>
+  <form action="/reservas" method="post">
+    <div class="campo"><label for="estudiante">Nombre del estudiante</label><input id="estudiante" name="estudiante" type="text" autocomplete="name" required value="<%= valores.estudiante || '' %>"></div>
+    <div class="campo"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required value="<%= valores.email || '' %>"></div>
+    <div class="campo"><label for="sala">Sala</label><select id="sala" name="sala" required><option value="">Elige una sala</option><% salasPermitidas.forEach((sala) => { %><option value="<%= sala %>" <%= valores.sala === sala ? 'selected' : '' %>><%= sala %></option><% }); %></select></div>
+    <div class="campo"><label for="fecha">Fecha</label><input id="fecha" name="fecha" type="date" required value="<%= valores.fecha || '' %>"></div>
+    <div class="campo"><label for="turno">Turno</label><select id="turno" name="turno" required><option value="">Elige un turno</option><% turnosPermitidos.forEach((turno) => { %><option value="<%= turno %>" <%= valores.turno === turno ? 'selected' : '' %>><%= turno %></option><% }); %></select></div>
+    <div class="campo"><label for="personas">Cantidad de personas (1 a 6)</label><input id="personas" name="personas" type="number" min="1" max="6" step="1" required value="<%= valores.personas ?? '' %>"></div>
+    <button class="boton" type="submit">Guardar reserva</button>
+  </form>
+</section>
